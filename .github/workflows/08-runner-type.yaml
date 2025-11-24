@@ -1,0 +1,43 @@
+name: Runner types
+on:
+  workflow_dispatch:
+    
+jobs:
+  github-hosted-ubuntu-vm:
+    name: Ubuntu 24
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Github hosted runner type sample workflow"
+
+
+
+################################
+##### Github Hosted Runners ####
+################################
+
+runs-on: ubuntu-24.04
+runs-on: windows-latest
+runs-on: macos-latest
+
+# (running inside of a container)
+runs-on: ubuntu-24.04
+container:
+  image: alpine:3.20
+
+## ( running on using larger vm )
+runs-on:
+  group: ubuntu-runners
+  labels: ubuntu-24.04-16core
+
+################################
+##### Third Party Hosted Runners ####
+################################
+
+runs-on: namespace-profile-default
+runs-on: namespace-profile-default-arm64
+runs-on: namespace-profile-custom-image
+
+################################
+##### Self Hosted Runners ####
+################################
+runs-on: my-self-hosted-runner-name
