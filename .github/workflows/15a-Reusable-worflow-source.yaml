@@ -1,0 +1,32 @@
+name: Reusable Workflow Source
+on:
+  workflow_call:
+    inputs:
+      foo:
+        required: true
+        type: string
+      environment:
+        description: " Target github environment name ( e.g. staging, production)"
+        required: true
+        type: string
+    secrets:
+      EXAMPLE_REPO_SECRET:
+        required: true
+
+jobs:
+  reusable-workflow-job:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: job in reusable workflow
+        env:
+          FOO: ${{ inputs.foo }}
+          EXAMPLE_REPO_SECRET: ${{ secrets.EXAMPLE_REPO_SECRET }}
+          EXAMPLE_ENVIRONMENT_SECRET: ${{ secrets.EXAMPLE_ENVIRONMENT_SECRET }}
+          EXAMPLE_ENVIRONMENT_VAR: ${{ secrets.EXAMPLE_ENVIRONMENT_VAR }}
+        run: |
+          echo "FOO = $FOO"
+          echo "EXAMPLE_REPO_SECRET = $EXAMPLE_REPO_SECRET"
+          echo "EXAMPLE_ENVIRONMENT_SECRET = $EXAMPLE_ENVIRONMENT_SECRET"
+          echo "EXAMPLE_ENVIRONMENT_VAR = $EXAMPLE_ENVIRONMENT_VAR"
